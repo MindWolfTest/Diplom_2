@@ -1,7 +1,6 @@
 package ru.praktikum.user;
 
 import com.github.javafaker.Faker;
-import io.qameta.allure.Step;
 import ru.praktikum.models.user.User;
 
 public class UserGenerator
@@ -39,24 +38,4 @@ public class UserGenerator
                 .password(faker.internet().password(8,10))
                 .build();
     }
-
-    public UserGenerator generateEmail()
-    {
-        faker.internet().safeEmailAddress();
-        return this;
-    }
-
-    public UserGenerator generatePassword()
-    {
-        faker.internet().password(8,10);
-        return this;
-    }
-    public UserGenerator generateName()
-    {
-        faker.name().firstName();
-        return this;
-    }
-
-
-
 }

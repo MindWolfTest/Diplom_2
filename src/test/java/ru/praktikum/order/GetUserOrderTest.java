@@ -9,7 +9,7 @@ import ru.praktikum.Order.OrderGetFromUser;
 import ru.praktikum.models.order.Order;
 import ru.praktikum.models.order.OrderGenerator;
 import ru.praktikum.models.user.User;
-import ru.praktikum.user.BeforeAndAfterTest;
+import ru.praktikum.BeforeAndAfterTest;
 import ru.praktikum.user.UserCreateAndAuthorization;
 
 import static org.apache.http.HttpStatus.*;

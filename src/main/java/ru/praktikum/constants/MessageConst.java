@@ -17,10 +17,8 @@ public class MessageConst
     public static final String EMAIL = "email";
     public static final String PASSWORD = "password";
     public static final String NAME = "name";
-
     public static final String HASH_OK = "ok";
     public static final String WRONG_HASH = "wrong";
     public static final String HASH_NULL = "null";
     public static final String WRONG_ID_ING = "Ingredient ids must be provided";
-
 }

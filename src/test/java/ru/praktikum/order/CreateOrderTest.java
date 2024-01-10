@@ -11,9 +11,8 @@ import ru.praktikum.Order.OrderCreate;
 import ru.praktikum.models.order.Order;
 import ru.praktikum.models.order.OrderGenerator;
 import ru.praktikum.models.user.User;
-import ru.praktikum.user.BeforeAndAfterTest;
+import ru.praktikum.BeforeAndAfterTest;
 import ru.praktikum.user.UserCreateAndAuthorization;
-
 
 import java.util.Objects;
 
@@ -30,24 +29,23 @@ public class CreateOrderTest extends BeforeAndAfterTest
     private final UserCreateAndAuthorization userCreate = new UserCreateAndAuthorization();
     private final String[] _id;
     private final String booleanHash;
-    private final String testName;
 
 
-    public CreateOrderTest(String[] _id, String booleanHash, String testName)
+    public CreateOrderTest(String[] _id, String booleanHash)
     {
         this._id = _id;
         this.booleanHash = booleanHash;
-        this.testName = testName;
+
     }
 
     @Parameterized.Parameters()
     public static Object[][] getParameters()
     {
         return new Object[][]{
-                {new String[]{"61c0c5a71d1f82001bdaaa6d", "61c0c5a71d1f82001bdaaa6f"}, HASH_OK, "Формирование заказа с корректным хэш 2ух ингредиентов"},
-                {new String[]{"61c0c5a71d1f82001bdaaa6d"}, HASH_OK, "Формирование заказа с корректным хэш 1го ингридиента"},
-                {new String[]{"61c0c5a71d1f82001bdaaa6d", "123"}, WRONG_HASH, "Формирование заказа с корректным хэш 1го ингредиента"},
-                {new String[]{null}, HASH_NULL, "Формирование заказа без игридиентов"}
+                {new String[]{"61c0c5a71d1f82001bdaaa6d", "61c0c5a71d1f82001bdaaa6f"}, HASH_OK},
+                {new String[]{"61c0c5a71d1f82001bdaaa6d"}, HASH_OK},
+                {new String[]{"61c0c5a71d1f82001bdaaa6d", "123"}, WRONG_HASH},
+                {new String[]{null}, HASH_NULL}
         };
     }
 
@@ -85,32 +83,32 @@ public class CreateOrderTest extends BeforeAndAfterTest
 
     }
 
-        @Test
-        @DisplayName("Создание заказа без авторизации")
-        @Description("Создание заказа без авторизации")
-        public void createOrderWithOutLogin ()
-        {
+    @Test
+    @DisplayName("Создание заказа без авторизации")
+    @Description("Создание заказа без авторизации")
+    public void createOrderWithOutLogin()
+    {
 
-            OrderGenerator createNewOrder = new OrderGenerator();
-            Order order = createNewOrder.orderGenerator(_id);
-            OrderCreate orderCreate = new OrderCreate();
-            if (Objects.equals(booleanHash, HASH_OK))
-            {
-                Response responseOrder = orderCreate.createNewOrderWithOutLogin(order);
-                responseOrder.then().assertThat().statusCode(SC_OK)
-                        .and().body(SUCCESS, equalTo(TRUE));
-            }
-            else if (Objects.equals(booleanHash, WRONG_HASH))
-            {
-                Response responseOrder = orderCreate.createNewOrderWithOutLogin(order);
-                responseOrder.then().assertThat().statusCode(SC_INTERNAL_SERVER_ERROR);
-            }
-            else if (Objects.equals(booleanHash, HASH_NULL))
-            {
-                Response responseOrder = orderCreate.createNewOrderWithOutLogin(order);
-                responseOrder.then().assertThat().statusCode(SC_BAD_REQUEST)
-                        .and().body(SUCCESS, equalTo(FALSE)).body(MESSAGE, equalTo(WRONG_ID_ING));
-            }
+        OrderGenerator createNewOrder = new OrderGenerator();
+        Order order = createNewOrder.orderGenerator(_id);
+        OrderCreate orderCreate = new OrderCreate();
+        if (Objects.equals(booleanHash, HASH_OK))
+        {
+            Response responseOrder = orderCreate.createNewOrderWithOutLogin(order);
+            responseOrder.then().assertThat().statusCode(SC_OK)
+                    .and().body(SUCCESS, equalTo(TRUE));
         }
+        else if (Objects.equals(booleanHash, WRONG_HASH))
+        {
+            Response responseOrder = orderCreate.createNewOrderWithOutLogin(order);
+            responseOrder.then().assertThat().statusCode(SC_INTERNAL_SERVER_ERROR);
+        }
+        else if (Objects.equals(booleanHash, HASH_NULL))
+        {
+            Response responseOrder = orderCreate.createNewOrderWithOutLogin(order);
+            responseOrder.then().assertThat().statusCode(SC_BAD_REQUEST)
+                    .and().body(SUCCESS, equalTo(FALSE)).body(MESSAGE, equalTo(WRONG_ID_ING));
+        }
+    }
 
 }

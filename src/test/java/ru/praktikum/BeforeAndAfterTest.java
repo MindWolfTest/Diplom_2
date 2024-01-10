@@ -1,8 +1,9 @@
-package ru.praktikum.user;
+package ru.praktikum;
 
 import io.restassured.RestAssured;
 import org.junit.After;
 import org.junit.Before;
+import ru.praktikum.user.DeleteUser;
 
 import static ru.praktikum.constants.UrlConst.BASE_URL;
 

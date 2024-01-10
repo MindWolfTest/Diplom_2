@@ -4,6 +4,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.junit.Test;
+import ru.praktikum.BeforeAndAfterTest;
 import ru.praktikum.models.user.User;
 
 import static org.apache.http.HttpStatus.SC_OK;

@@ -21,6 +21,7 @@ public class OrderCreate
                 .when()
                 .post(ORDER_CREATE_API);
     }
+
     @Step("Создание заказа без авторизации {order}")
     public Response createNewOrderWithOutLogin(Order order)
     {
