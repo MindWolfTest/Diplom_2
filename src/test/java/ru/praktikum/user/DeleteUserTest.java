@@ -46,5 +46,4 @@ public class DeleteUserTest
                 .body(SUCCESS, equalTo(TRUE))
                 .body(MESSAGE, equalTo(TEXT_USER_SUCCESSFULLY_REMOVED));
     }
-
 }

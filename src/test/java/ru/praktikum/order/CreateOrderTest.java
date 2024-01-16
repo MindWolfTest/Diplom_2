@@ -19,6 +19,7 @@ import java.util.Objects;
 import static org.apache.http.HttpStatus.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 
+import static ru.praktikum.constants.HashDataConst.*;
 import static ru.praktikum.constants.MessageConst.*;
 import static ru.praktikum.user.UserGenerator.createCurrentRandomUser;
 
@@ -42,10 +43,10 @@ public class CreateOrderTest extends BeforeAndAfterTest
     public static Object[][] getParameters()
     {
         return new Object[][]{
-                {new String[]{"61c0c5a71d1f82001bdaaa6d", "61c0c5a71d1f82001bdaaa6f"}, HASH_OK},
-                {new String[]{"61c0c5a71d1f82001bdaaa6d"}, HASH_OK},
-                {new String[]{"61c0c5a71d1f82001bdaaa6d", "123"}, WRONG_HASH},
-                {new String[]{null}, HASH_NULL}
+                {CORRECT_DATA_HASH_WITH_TWO_INGREDIENTS, HASH_OK},
+                {CORRECT_DATA_HASH_WITH_ONE_INGREDIENT, HASH_OK},
+                {WRONG_DATA_INGREDIENT, WRONG_HASH},
+                {NULL_DATA_INGREDIENTS, HASH_NULL}
         };
     }
 
@@ -77,7 +78,7 @@ public class CreateOrderTest extends BeforeAndAfterTest
         {
             Response responseOrder = orderCreate.createNewOrderWithLogin(accessToken, order);
             responseOrder.then().assertThat().statusCode(SC_BAD_REQUEST)
-                    .and().body(SUCCESS, equalTo(FALSE));
+                    .and().body(SUCCESS, equalTo(FALSE)).body(MESSAGE, equalTo(WRONG_ID_ING));
         }
 
 
@@ -110,5 +111,4 @@ public class CreateOrderTest extends BeforeAndAfterTest
                     .and().body(SUCCESS, equalTo(FALSE)).body(MESSAGE, equalTo(WRONG_ID_ING));
         }
     }
-
 }
